@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Movies Home</string>
+    <color name="white">#FFFFFF</color>
+    <string name="action_favorite">Favourite</string>
+
+</resources>
