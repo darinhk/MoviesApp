@@ -36,6 +36,7 @@ public class MoviesListFragment extends BaseFragment implements PositionClickLis
     RecyclerView rv_moviesdata;
     private FragmentCallBack callBack;
     private MoviesListPresenter mPresenter;
+    // my adapter class
     private MyAdapter myadapter;
 
     public static MoviesListFragment newInstance() {
