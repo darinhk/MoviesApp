@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import diyarme.com.moviesapp.models.MovieData;
 
 /**
@@ -25,47 +27,48 @@ import diyarme.com.moviesapp.models.MovieData;
  */
 
 public class MovieDescriptionFragment extends Fragment {
-    private ImageView iv_moviedescriptionimg;
-    private TextView tv_descriptiontitle;
-    private TextView tv_releasedate;
-    private TextView tv_overview;
-    private TextView tv_releasedatetext;
-    private TextView tv_votecountext;
-    private TextView tv_voteaveragetext;
-    private TextView tv_adulttext;
-    private TextView tv_languagetext;
-    private TextView tv_id;
-    private TextView tv_popularitytext;
-    private TextView tv_videotext;
-    private ImageView iv_sidemovieimg;
-    private RatingBar mRatingBar;
+
+    @BindView(R.id.iv_moviedescriptionimg)
+    ImageView mImageMoviedescriptionimg;
+    @BindView(R.id.tv_descriptiontitle)
+    TextView mTextDescriptiontitle;
+    @BindView(R.id.tv_overview)
+    TextView mTextOverview;
+    @BindView(R.id.tv_releasedatetext)
+    TextView mTextReleasetext;
+    @BindView(R.id.tv_votecounttext)
+    TextView mTextVotecounttext;
+    @BindView(R.id.tv_voteaveragetext)
+    TextView mTextVoteaverage;
+    @BindView(R.id.tv_adulttext)
+    TextView mTextAdult;
+    @BindView(R.id.tv_languagetext)
+    TextView mTextLanguage;
+    @BindView(R.id.tv_popularitytext)
+    TextView mTextPopularity;
+    @BindView(R.id.tv_videotext)
+    TextView mTextVideo;
+    @BindView(R.id.iv_sidemovieimg)
+    ImageView mImageSidemovie;
+    @BindView(R.id.ratingBar2)
+    RatingBar mRatingBar;
+    @BindView(R.id.tv_idtext)
+    TextView mTextId;
     private SharedPreferences mSharedPref;
     private Bundle data;
-
     private MovieData mMovieData;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.moviedescription_view, container, false);
         setHasOptionsMenu(true);
+        ButterKnife.bind(this, view);
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        iv_moviedescriptionimg = (ImageView) view.findViewById(R.id.iv_moviedescriptionimg);
-        tv_descriptiontitle = (TextView) view.findViewById(R.id.tv_descriptiontitle);
-        tv_releasedatetext = (TextView) view.findViewById(R.id.tv_releasedatetext);
-        tv_languagetext = (TextView) view.findViewById(R.id.tv_languagetext);
-        tv_adulttext = (TextView) view.findViewById(R.id.tv_adulttext);
-        tv_videotext = (TextView) view.findViewById(R.id.tv_videotext);
-        tv_popularitytext = (TextView) view.findViewById(R.id.tv_popularitytext);
-        tv_voteaveragetext = (TextView) view.findViewById(R.id.tv_voteaveragetext);
-        tv_votecountext = (TextView) view.findViewById(R.id.tv_votecounttext);
-        tv_overview = (TextView) view.findViewById(R.id.tv_overview);
-        iv_sidemovieimg = (ImageView) view.findViewById(R.id.iv_sidemovieimg);
-        tv_id = (TextView) view.findViewById(R.id.tv_idtext);
         mRatingBar = (RatingBar) view.findViewById(R.id.ratingBar2);
         mRatingBar.setEnabled(false);
         mSharedPref = getActivity().getSharedPreferences("favourites", Context.MODE_PRIVATE);
@@ -83,24 +86,24 @@ public class MovieDescriptionFragment extends Fragment {
                 .load("https://image.tmdb.org/t/p/w500/" + posterpath).centerCrop()
                 .placeholder(R.drawable.placeholder)
                 .crossFade()
-                .into(iv_moviedescriptionimg);
+                .into(mImageMoviedescriptionimg);
 
-        tv_popularitytext.setText(String.format("%s %.2f", "Popularity: ", mMovieData.getPopularity()));
-        tv_votecountext.setText(String.format("%s %d", "Vote count: ", mMovieData.getVote_count()));
-        tv_voteaveragetext.setText(String.format("%s %.2f", "Vote average: ", mMovieData.getVote_average()));
-        tv_languagetext.setText(String.format("%s %s", "Language: ", mMovieData.getOriginal_language()));
-        tv_releasedatetext.setText(String.format("%s %s", "Release date:", mMovieData.getRelease_date()));
-        tv_videotext.setText(String.format("%s %s", "Video: ", mMovieData.isVideo() + ""));
-        tv_adulttext.setText(String.format("%s %s", "Adult: ", mMovieData.getAdult() + ""));
-        tv_id.setText(String.format("%s %d", "ID: ", mMovieData.getId()));
-        tv_overview.setText(mMovieData.getOverview());
-        tv_descriptiontitle.setText(mMovieData.getTitle().toUpperCase());
+        mTextPopularity.setText(String.format("%s %.2f", "Popularity: ", mMovieData.getPopularity()));
+        mTextVotecounttext.setText(String.format("%s %d", "Vote count: ", mMovieData.getVote_count()));
+        mTextVoteaverage.setText(String.format("%s %.2f", "Vote average: ", mMovieData.getVote_average()));
+        mTextLanguage.setText(String.format("%s %s", "Language: ", mMovieData.getOriginal_language()));
+        mTextReleasetext.setText(String.format("%s %s", "Release date:", mMovieData.getRelease_date()));
+        mTextVideo.setText(String.format("%s %s", "Video: ", mMovieData.isVideo() + ""));
+        mTextAdult.setText(String.format("%s %s", "Adult: ", mMovieData.getAdult() + ""));
+        mTextId.setText(String.format("%s %d", "ID: ", mMovieData.getId()));
+        mTextOverview.setText(mMovieData.getOverview());
+        mTextDescriptiontitle.setText(mMovieData.getTitle().toUpperCase());
         Glide
                 .with(getActivity())
                 .load("https://image.tmdb.org/t/p/w500/" + posterpath)
                 .placeholder(R.drawable.placeholder)
                 .crossFade()
-                .into(iv_sidemovieimg);
+                .into(mImageSidemovie);
         mRatingBar.setRating((float) (mMovieData.getVote_average() / 2));
 
         String value = mSharedPref.getString(data.get("position") + "", "null");

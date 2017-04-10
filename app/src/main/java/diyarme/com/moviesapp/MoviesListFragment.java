@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import diyarme.com.moviesapp.models.MovieData;
 import diyarme.com.moviesapp.presenters.MoviesListPresenter;
 import diyarme.com.moviesapp.views.MoviesListView;
@@ -26,7 +28,8 @@ import diyarme.com.moviesapp.views.MoviesListView;
 
 //public class MoviesListFragment extends Fragment implements APICallBack, PositionClickListener {
 public class MoviesListFragment extends Fragment implements PositionClickListener, MoviesListView {
-    private RecyclerView rv_moviesdata;
+    @BindView(R.id.rv_movieslist)
+    RecyclerView rv_moviesdata;
     private FragmentCallBack callBack;
     private MoviesListPresenter mPresenter;
     private MyAdapter myadapter;
@@ -55,13 +58,13 @@ public class MoviesListFragment extends Fragment implements PositionClickListene
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.movieslist_view, container, false);
+        ButterKnife.bind(this, view);
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rv_moviesdata = (RecyclerView) view.findViewById(R.id.rv_movieslist);
         rv_moviesdata.setLayoutManager(new LinearLayoutManager(getContext()));
         mPresenter = new MoviesListPresenter(getContext(), this);
         mPresenter.accessAPI();
