@@ -1,4 +1,4 @@
-package diyarme.com.moviesapp;
+package diyarme.com.moviesapp.ui;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -20,13 +20,14 @@ import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import diyarme.com.moviesapp.R;
 import diyarme.com.moviesapp.models.MovieData;
 
 /**
  * Created by D.Kablaoui on 3/15/2017.
  */
 
-public class MovieDescriptionFragment extends Fragment {
+public class MovieDescriptionFragment extends BaseFragment {
 
     @BindView(R.id.iv_moviedescriptionimg)
     ImageView mImageMoviedescriptionimg;
@@ -58,12 +59,11 @@ public class MovieDescriptionFragment extends Fragment {
     private Bundle data;
     private MovieData mMovieData;
 
+
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.moviedescription_view, container, false);
-        setHasOptionsMenu(true);
-        ButterKnife.bind(this, view);
-        return view;
+    int setViewId() {
+        return R.layout.moviedescription_view;
     }
 
     @Override

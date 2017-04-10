@@ -1,4 +1,4 @@
-package diyarme.com.moviesapp;
+package diyarme.com.moviesapp.ui;
 
 
 import android.content.Context;
@@ -17,6 +17,10 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import diyarme.com.moviesapp.FragmentCallBack;
+import diyarme.com.moviesapp.MyAdapter;
+import diyarme.com.moviesapp.PositionClickListener;
+import diyarme.com.moviesapp.R;
 import diyarme.com.moviesapp.models.MovieData;
 import diyarme.com.moviesapp.presenters.MoviesListPresenter;
 import diyarme.com.moviesapp.views.MoviesListView;
@@ -27,7 +31,7 @@ import diyarme.com.moviesapp.views.MoviesListView;
  */
 
 //public class MoviesListFragment extends Fragment implements APICallBack, PositionClickListener {
-public class MoviesListFragment extends Fragment implements PositionClickListener, MoviesListView {
+public class MoviesListFragment extends BaseFragment implements PositionClickListener, MoviesListView {
     @BindView(R.id.rv_movieslist)
     RecyclerView rv_moviesdata;
     private FragmentCallBack callBack;
@@ -54,13 +58,11 @@ public class MoviesListFragment extends Fragment implements PositionClickListene
     public MoviesListFragment() {
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.movieslist_view, container, false);
-        ButterKnife.bind(this, view);
-        return view;
+    int setViewId() {
+        return R.layout.movieslist_view;
     }
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -113,7 +115,7 @@ public class MoviesListFragment extends Fragment implements PositionClickListene
 
     @Override
     public void onComplete(ArrayList<MovieData> movielist) {
-         myadapter = new MyAdapter(getContext(), movielist);
+        myadapter = new MyAdapter(getContext(), movielist);
         myadapter.setCallBack(MoviesListFragment.this);
         rv_moviesdata.setAdapter(myadapter);
     }

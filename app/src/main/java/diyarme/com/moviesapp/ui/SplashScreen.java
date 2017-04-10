@@ -1,11 +1,11 @@
-package diyarme.com.moviesapp;
+package diyarme.com.moviesapp.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ProgressBar;
 
+import diyarme.com.moviesapp.R;
 
 
 public class SplashScreen extends AppCompatActivity {
@@ -28,7 +28,7 @@ public class SplashScreen extends AppCompatActivity {
             }
         };
         Handler handler = new Handler();
-        handler.postDelayed(runnable,3*1000);
+        handler.postDelayed(runnable,2*1000);
     }
 
 
